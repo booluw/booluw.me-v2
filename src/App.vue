@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <app-header />
-    <router-view/>
+    <router-view />
+    <app-footer />
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/AppHeader.vue'
+import AppFooter from '@/components/AppFooter.vue'
 
 export default {
   name: 'App',
   components: {
-    'app-header': AppHeader
+    'app-header': AppHeader,
+    'app-footer': AppFooter
   }
 }
 </script>
@@ -85,7 +88,8 @@ body {
   padding: 0;
   margin: 0;
   font-variant: small-caps;
-
+  font-size: 2.3rem;
+  
   &--small {
     font-variant: normal;
     text-transform: uppercase;
@@ -147,6 +151,29 @@ body {
     }
   }
 
+  &--recommendation {
+    border-top: none;
+    padding: 1rem .5rem;
+
+    background: linear-gradient(to bottom, white 64%, crimson 46%);
+    text-align: center;
+
+    .card__img {
+      border-radius: 50%;
+      width: 8rem;
+      height: 8rem;
+      border: .5rem solid white;
+    }
+    .card__description {
+      text-align: justify;
+      text-align-last: left;
+    }
+    .card__heading--sub {
+      color: white!important;
+      opacity: .5!important;
+    }
+  }
+
   &__head {
     margin: 1rem 1rem 0;
 
@@ -186,6 +213,60 @@ body {
   }
 }
 
+.btn {
+  padding: .7rem 2rem;
+  margin: .5rem 0;
+  border: .2rem solid $bg;
+  background-color: $bg;
+  color: crimson;
+  font-weight: 700;
+  border-radius: .3rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: Roboto, sans-serif;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+  transform: translate(0);
+  //animation-name: shake;
+  //animation-delay: 3s;
+  //animation-duration: infinite;
+  
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &--outline {
+    background-color: transparent;
+    border-color: $bg;
+    color: $bg;
+  }
+
+  .btn__icon {
+    font-size: 2rem;
+    margin: 0 1rem 0 0;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 5px 0px grey;
+    animation-name: shake;
+  }
+
+  &:active {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+
+}
+
+@keyframes shake {
+  from {
+    transform: translateX(-3px);
+  }
+  to {
+    transform: translateX(3px);
+  }
+}
 
 @media (min-width: 1200px) {
   .section {

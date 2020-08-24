@@ -1,7 +1,7 @@
 <template>
   <div class="jumbotron">
     <div class="jumbotron__social">
-      <img alt="Vue logo" src="../assets/logo.png" class="jumbotron__img">
+      <img alt="Picture of Boluwatife Johnson" src="../assets/me.png" class="jumbotron__img">
     </div>
     <div class="jumbotron__text">
       <div>
@@ -26,7 +26,7 @@
       <a href="//twitter.com/booluw" target="_blank" rel="noreferral">
         <i class="ion icon ion-logo-twitter"></i>
       </a>
-      <a href="//medium.com/booluw" target="_blank" rel="noreferral">
+      <a href="//linkedin.com/in/johnson-boluwatife-8129b9110" target="_blank" rel="noreferral">
         <i class="ion icon ion-logo-linkedin"></i>
       </a>
     </div>
@@ -73,11 +73,13 @@ $color: #5eb1bf;
     background-color: $base;
     border: .2rem solid $bg;
     border-radius: .5rem 0;
+    text-align: right;
   }
 
   &__img {
-    width: 100%;
+    width: 80%;
     height: 100%;
+    transform: rotate(10deg);
   }
 
   &__text {

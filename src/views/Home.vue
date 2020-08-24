@@ -5,7 +5,7 @@
       <h2 class="heading heading--small" style="color: #ffcb05;">Projects</h2>
       <div class="slider">
         <div class="card card--with-img" v-for="project in projects" :key="project.title">
-          <img :src="`${publicPath}img/projects/${project.img}`" class="card__img" alt="" />
+          <img :src="`${publicPath}img/projects/${project.img}`" class="card__img" :alt="`A screenshot of ${project.title}'s website`" />
           <div class="card__pallete"></div>
           <div class="card__head">
             <a :href="project.url" target="_blank" rel="noreferral" class="card__heading">{{project.title}}</a>
@@ -34,10 +34,19 @@
         </div>
       </div>
     </section>
-    <section class="section" style="background-color: transparent">
+    <section class="section" style="background-color: transparent" v-if="recommendations.length != 0">
       <h2 class="heading heading--small">Recommendations</h2>
-      <div class="container--flex">
-
+      <div class="slider">
+        <div class="card card--recommendation" v-for="recommend in recommendations" :key="recommend.author">
+          <p class="card__description">
+            {{recommend.description}}
+          </p>
+          <img :src="`${publicPath}img/people/${recommend.img}`" class="card__img" :alt="`Picture of ${recommend.author} - ${recommend.portfolio}, ${recommend.company}`"/>
+          <div class="card__head">
+            <h2 class="card__heading">{{recommend.author}}</h2>
+            <h3 class="card__heading card__heading--sub">{{recommend.portfolio}} - {{recommend.company}}</h3>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -126,7 +135,8 @@ export default {
             on nation building, technology and startup discovery.
           `
         }
-      ]
+      ],
+      recommendations: []
     }
   },
 }
