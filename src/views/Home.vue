@@ -2,29 +2,25 @@
   <div class="home">
     <HelloWorld />
     <section class="section">
-      <h2 class="heading heading--small" style="color: #ffcb05;">Projects</h2>
-      <div class="slider">
+      <h2 class="heading heading--small">Projects</h2>
+      <div class="slider gsap" ref="cards">
         <div class="card card--with-img" v-for="project in projects" :key="project.title">
           <img :src="`${publicPath}img/projects/${project.img}`" class="card__img" :alt="`A screenshot of ${project.title}'s website`" />
-          <div class="card__pallete"></div>
           <div class="card__head">
             <a :href="project.url" target="_blank" rel="noreferral" class="card__heading">{{project.title}}</a>
             <h3 class="card__heading card__heading--sub">{{project.date}}</h3>
           </div>
-          <p class="card__description">{{project.description}}</p>
-          <div class="card__footer">
-            <h3 class="card__heading card__heading--footer">Stack</h3>
-            <div class="container--flex">
+          <div class="container--flex card__tags">
               <div class="chip" v-for="stack in project.stack" :key="stack">{{stack}}</div>
             </div>
-          </div>
+          <p class="card__description">{{project.description}}</p>
         </div>
       </div>
     </section>
-    <section class="section" style="background-color: #2e0854;">
-      <h2 class="heading heading--small" style="color: #ffcb05;">Experience</h2>
+    <section class="section">
+      <h2 class="heading heading--small">Experience</h2>
       <div class="container--des-flex">
-        <div class="card card--experience" v-for="exp in experience" :key="exp.post">
+        <div class="card card--experience fade" v-for="exp in experience" :key="exp.post" ref="fade">
           <i class="ion icon ion-md-star card__icon"></i>
           <div class="card__head">
             <h2 class="card__heading">{{exp.post}}</h2>
@@ -54,7 +50,11 @@
 
 <script>
 // @ is an alias to /src
+import { gsap } from 'gsap'
+
 import HelloWorld from '@/components/HelloWorld.vue'
+
+
 
 export default {
   name: 'Home',
@@ -74,12 +74,21 @@ export default {
             Created pages that handles the landing page, about, and investing in the company. I was also responsible for the hosting of the website on Google's Firebase platform.
           `,
           stack: ['HTML', 'CSS', 'JavaScript', 'Firebase']
+        },{
+          title: 'Cryptowise',
+          url: '//cryptowise.com.ng',
+          date: 'june, 2020',
+          img: 'cryptowise.png',
+          description: `
+            Created pages that handles the user's dashboard, about, FAQ, and training in the company. I was also responsible for the hosting and database of the website on Google's Firebase platform.
+          `,
+          stack: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'VUE JS', 'Firestore']
         },
         {
           title: 'HikePro',
           url: '//hike-pro.firebaseapp.com',
           date: 'august, 2020',
-          img: 'diatheke.png',
+          img: 'hikepro.png',
           description: `
             Created the Progressive Web App as a volunteer for a hiking group in my area. Features a blog and was hosted and powered by Firebase.
           `,
@@ -89,7 +98,7 @@ export default {
           title: 'Get Change Demo',
           url: '//getchange-demo.firebaseapp.com',
           date: 'august, 2020',
-          img: 'diatheke.png',
+          img: 'getchange.png',
           description: `
             Created a PWA and SPA for an interview for a Junior VUE JS developer at Emergent Labs.
             Built accordingly and pixel perfect to a Figma design and hosted on Firebase.
@@ -139,5 +148,32 @@ export default {
       recommendations: []
     }
   },
+  mounted() {
+    const fade = this.$refs.fade
+
+    //TODO: Add scrollTrigger animation
+    //tl.to(fade, 3, {opacity: 1, scale: 1})
+    fade.forEach(el => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: "bottom bottom",
+          end: "top top",
+          markers: false,
+          toggleActions: "play complete play reset"
+        }
+      }).to(el, {opacity: 1, scale: 1})
+    })
+
+  },
 }
 </script>
+<style lang="scss" scoped>
+/*.gsap {
+  transform: translateX(1000px);
+} */
+.fade {
+  opacity: 0;
+  transform: scale(0);
+}
+</style>

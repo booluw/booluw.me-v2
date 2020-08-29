@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header__logo">booluw</div>
+    <router-link to="/" class="header__logo">booluw</router-link>
     <nav class="header__nav">
       <ul class="nav__list">
         <li class="nav__list-item">
@@ -10,7 +10,7 @@
           <a href="//medium.com/@booluw" to="/" class="nav__link">Articles</a>
         </li>
         <li class="nav__list-item">
-          <a href="mailto:jaycewap@gmail.com" title="Send me an email" class="btn">
+          <a href="mailto:jaycewap@gmail.com" title="Send me an email" class="btn btn--outline">
             <i class="ion icon ion-md-mail btn__icon"></i>
             Hire Me
           </a>
@@ -39,9 +39,9 @@ $color: #5eb1bf;
   justify-content: center;
   flex-wrap: wrap;
   padding: 1rem .5rem;
-  background-color: $base;
-  color: $base;
-  border-top: .2rem solid $base;
+  background-color: #264658;
+  color: #264658;
+  border-top: .2rem solid $secondary;
   border-bottom: .05rem solid $color;
 
   &__logo {
@@ -50,6 +50,9 @@ $color: #5eb1bf;
     position: relative;
     color: $color;
     margin: 0 0 1rem;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: .3s ease-in-out;
     
     &::after {
       position: absolute;
@@ -58,8 +61,17 @@ $color: #5eb1bf;
       width: 30%;
       background-color: $secondary;
       bottom: -.2rem;
-      left: .7rem;
+      left: 1.2rem;
       border-radius: 1rem;
+      transition: .3s ease-in-out;
+    }
+
+    &:hover {
+      color: $secondary;
+
+      &::after {
+        background-color: $color;
+      }
     }
   }
 
@@ -81,9 +93,45 @@ $color: #5eb1bf;
   }
 }
 .nav__link {
-  padding: .5rem 1rem;
+  padding: .5rem;
+  margin: 0 .5rem;
   text-decoration: none;
   color: $secondary;
+  position: relative;
+  transition: .3s ease;
+
+    &::after {      
+      position: absolute;
+      content: '';
+      height: .2rem;
+      width: 30%;
+      background-color: $secondary;
+      bottom: -.1rem;
+      left: 1.2rem;
+      opacity: 0;
+    }
+
+    &:hover {
+
+      &::after {
+        bottom: -.1rem;
+        left: 1.2rem;
+        animation-name: slide;
+        animation-duration: 1s;
+        background-color: $secondary;
+        opacity: 1;
+      }
+    }
+}
+@keyframes slide {
+  from {
+    left: 0;
+    opacity: 0;
+  }
+  to {
+    left: 1.2rem;
+    opacity: 1;
+  }
 }
 
 .btn {
@@ -100,10 +148,6 @@ $color: #5eb1bf;
     padding: 1rem 4rem;
     justify-content: space-between;
     flex-wrap: nowrap;
-
-    &__logo {
-      font-size: 2rem;
-    }
   }
 
   .nav__link {

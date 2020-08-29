@@ -6,7 +6,12 @@ import store from './store'
 
 
 import '@/assets/css/ionicons.min.css'
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+
+
+gsap.registerPlugin(ScrollTrigger);
 Vue.config.productionTip = false
 
 new Vue({

@@ -1,25 +1,18 @@
 <template>
-  <div class="jumbotron">
-    <div class="jumbotron__social">
-      <img alt="Picture of Boluwatife Johnson" src="../assets/me.png" class="jumbotron__img">
+  <div class="jumbotron" ref="jumbo">
+    <div>
+      <img alt="Picture of Boluwatife Johnson" src="../assets/me.png" class="jumbotron__img" ref="img">
     </div>
     <div class="jumbotron__text">
-      <div>
+      <div id="text" ref="text">
         <span class="jumbotron__heading--small">I am</span>
         <h1 class="jumbotron__heading--lead">Boluwatife Johnson,</h1>
       </div>
-      <p class="cover-letter">
-        I'm passionate about building responsive and interactive websites.
+      <p class="cover-letter" ref="cover_letter">
+        FrontEnd Engineer, VUE JS junior and Technology writter.
       </p>
-      <!--div class="cover-skills">
-        <div class="chip">HTML</div>
-        <div class="chip">CSS</div>
-        <div class="chip">JavaScript</div>
-        <div class="chip">Vue JS</div>
-        <div class="chip">Sass</div>
-      </div -->
     </div>
-    <div class="jumbotron__links">
+    <div class="jumbotron__links" ref="links">
       <a href="//github.com/booluw" target="_blank" rel="noreferral">
         <i class="ion icon ion-logo-github"></i>
       </a>
@@ -40,10 +33,29 @@
 </template>
 
 <script>
+import { TimelineLite,Back,Bounce } from 'gsap'
+
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  mounted() {
+    
+    const tl = new TimelineLite()
+    const jumbo = this.$refs.jumbo
+    const img = this.$refs.img
+    const text = this.$refs.text
+    const cover_letter =  this.$refs.cover_letter
+    const links =  this.$refs.links
+
+
+
+    //    element, duration, {Properties to animate}
+    tl.to(jumbo, 2, {scale: 1, opacity: 1, ease: Back.easeOut.config(1.7)})
+    tl.to(text, 1, {y: 0,opacity: 1, ease: Back.easeOut.config(1.7)})
+    tl.to(cover_letter, 0.5,{opacity: 1, x: 0})
+    tl.to(img, 1, {x: 0,opacity: 1})
+    tl.to(links, 2, {rotate: 0, ease: Bounce.easeOut})
+
   }
 }
 </script>
@@ -56,37 +68,39 @@ $grey: #004e89;
 $bg: #bbdef0;
 $color: #5eb1bf;
 
+#text {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
 .jumbotron {
-  background-color: $base;
+  background-color: #264658;
   height: 60vh;
   display: flex;
   align-items: flex-start;
   padding: 0 .5rem;
+  margin: 0 0 1.5rem;
   position: relative;
 
-  &__social {
-    flex-basis: 40%;
-    height: 45%;
-    margin: 3rem 0 0;
-    padding: .5rem;
-    box-sizing: border-box;
-    background-color: $base;
-    border: .2rem solid $bg;
-    border-radius: .5rem 0;
-    text-align: right;
-  }
+  transform: scale(.3);
+  opacity: 0;
 
   &__img {
-    width: 80%;
+    width: 100%;
     height: 100%;
-    transform: rotate(10deg);
+    margin: 3rem 0 0;
+    background-color: #264658;
+    border-radius: .5rem 0;
+    text-align: right;
+
+    opacity: 0;
+    transform: translateX(-100px);
   }
 
   &__text {
     color: $grey;
     flex-basis: 60%;
     margin: 3rem 1rem 0;
-    //align-self: center;
   }
 
   &__heading {
@@ -115,6 +129,9 @@ $color: #5eb1bf;
 
     padding: 0 .5rem 0 0;
     font-size: 2.5rem;
+
+    transform: rotate(90deg);
+    transform-origin: right;
 
     a {
       color: $color;
@@ -145,6 +162,9 @@ $color: #5eb1bf;
   font-kerning: auto;
   font-style: italic;
   font-family: Roboto, sans-serif;
+
+  opacity: 0;
+  transform: translateX(100px);
 }
 
 .cover-skills {
@@ -158,7 +178,7 @@ $color: #5eb1bf;
     padding: 0 4rem;
     align-items: stretch;
 
-    &__social  {
+    &__img  {
       height: 80%;
       border: none;
     }

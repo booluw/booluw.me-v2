@@ -65,13 +65,13 @@ body {
 
 .section {
   padding: 1rem .5rem;
-  background-color: $grey;
+  background-color: $bg;
 }
 
 .slider {
   display: flex;
   overflow-x: auto;
-  margin: 1rem 0 .5rem 0;
+  margin: 3rem 0 .5rem 0;
   padding: 0 1rem 1rem 0;
 }
 
@@ -101,12 +101,10 @@ body {
 }
 
 .chip {
-  padding: .25rem .5rem;
-  margin: .2rem;
+  margin: 0 1rem 0 0;
   -webkit-margin-top-collapse: collapse;
-  background-color: aliceblue;
-  border-radius: 1rem;
-  font-weight: 600;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .card {
@@ -114,23 +112,35 @@ body {
   min-width: calc(100% / 1.1);
 
   background-color: $bg;
-  border-top: .3rem solid crimson;
+  cursor: pointer;
+  border-top: .3rem solid #264658;
   border-radius: .5rem;
   padding: 0 0 1rem;
   margin: 0 .3rem;
   box-shadow: 5px 5px 10px rgba($color: $base, $alpha: .5);
 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
   &--with-img {
+
+    &:hover .card__img {
+      filter: grayscale(0);
+    }
     .card__img {
       width: 100%;
       height: auto;
+      filter: grayscale(100%);
+      transition: .5s ease;
+      border-radius: .1rem;
     }
   }
 
   &--experience {
     width: auto;
     border-top: none;
-    border-left: .5rem solid crimson;
+    border-left: .5rem solid #264658;
     margin: .7rem 1.8rem .7rem 1rem;
     padding: 2rem 0;
 
@@ -139,7 +149,7 @@ body {
       left: -1.8rem;
       top: .7rem;
       
-      background-color: crimson;
+      background-color: #264658;
       color: $bg;
       padding: .8rem 1rem;
       border-radius: 50%;
@@ -177,7 +187,16 @@ body {
   &__head {
     margin: 1rem 1rem 0;
 
+    a.card__heading::after{
+      position: absolute;
+      content: "";
+      height: .2rem;
+      opacity: 1;
+      background-color: #333;
+    }
+
     .card__heading {
+      position: relative;
       font-family: Lora, sans-serif;
       font-size: 1.5rem;
       text-decoration: none;
@@ -194,6 +213,16 @@ body {
     }
   }
 
+  @keyframes slide {
+    from {
+      right: 100%;
+      opacity: 0;
+    }
+    to {
+      right: 0;
+      opacity: 1;
+    }
+  }
   .card__heading--footer {
     font-family: Lora, sans-serif;
     font-size: 1rem;
@@ -206,12 +235,28 @@ body {
     font-family: Roboto, sans-serif;
     margin: 1rem;
     padding: 0;
+    font-weight: 400;
   }
-
-  &__footer {
-    margin: 1rem;
+  &__tags {
+    margin: .7rem 1rem 0;
   }
 }
+
+.card:hover a.card__heading::after {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  animation-name: slide;
+  animation-duration: 1s;
+  background-color: #333;
+}
+
+.card__footer {
+    margin: 1rem;
+    justify-self: flex-end!important;
+    border: thin solid red;
+    align-self: flex-end!important;
+  }
 
 .btn {
   padding: .7rem 2rem;
@@ -227,9 +272,6 @@ body {
   transition: .3s ease-in-out;
   cursor: pointer;
   transform: translate(0);
-  //animation-name: shake;
-  //animation-delay: 3s;
-  //animation-duration: infinite;
   
   display: inline-flex;
   justify-content: center;
@@ -248,8 +290,7 @@ body {
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 5px 0px grey;
-    animation-name: shake;
+    box-shadow: 0 3px 5px 0px rgba($color: black, $alpha: .5);
   }
 
   &:active {
